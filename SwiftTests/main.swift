@@ -22,10 +22,25 @@ func test(){
     defer{
         print("close f2");
     }
+    print("read from f1");
     if arc4random_uniform(100) > 50 {
         return;
     }
+    print("write from f2");
 }
 
-test();
-//Works
+//test();
+
+
+func buildArray(n: Int,
+                start: Double,
+                end: Double,
+                fn: (Double) -> Double) -> [Double]{
+    var result = [Double]();
+    let delta = (end-start) / Double(n-1);
+    for i in 0..<n{
+        let x = start + delta * Double(i);
+        result += [fn(x)];
+    }
+    return result;
+}
